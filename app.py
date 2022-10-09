@@ -20,7 +20,10 @@ from sklearn.metrics import *
 from tensorflow.keras.layers import *
 from tensorflow.keras.models import *
 import tensorflow_addons as tfa
-
+import subprocess
+if not os.path.isfile('model.h5'):
+    subprocess.run(['curl --output model.h5 "https://media.githubusercontent.com/media/Khanamin-XOR/stream/main/final_model.h5"'], shell=True)
+model = load_model(model.h5)
 st.title("Emotion Classification with Image and Audio with Multimodal Approch")
 st.header("Example of emotion classification")
 st.text("Upload an  image and a Audio file for classification as Happy, Neural, Anger and Disgusted")
@@ -56,9 +59,9 @@ if uploaded_file_1 and uploaded_file_2 is not None:
 
 	st.write("")
 	st.write("Classifying...")
-
+	
 	def classification_report(image,audio,weights):
-		model = load_model(weights)
+		#model = load_model(weights)
 		data = np.ndarray(shape=(1, 160, 160, 3), dtype=np.float32)
 		size = (160, 160)
 		image = ImageOps.fit(image, size, Image.ANTIALIAS)
@@ -106,7 +109,7 @@ if uploaded_file_1 and uploaded_file_2 is not None:
 		predictions = model.predict(values)
 		return np.argmax(predictions)
 
-	label = classification_report(face_images,raw_data,'final_model.h5')
+	label = classification_report(face_images,raw_data, model)
 	if label == 0:
 		st.write("The Emotion is Anger")
 	elif (label ==1):

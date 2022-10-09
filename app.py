@@ -5,7 +5,7 @@ import numpy as np
 import librosa
 import cv2
 from keras.applications.vgg16 import preprocess_input
-#from librosa.util import fix_length
+from librosa.util import fix_length
 import tensorflow_addons as tfa
 import numpy as np
 import pandas as pd
@@ -92,7 +92,7 @@ if uploaded_file_1 and uploaded_file_2 is not None:
 
 		sample_rate = 12000
 		max_length  = sample_rate*10
-		padded_audio = librosa.util.fix_length(audio, size=max_length)
+		padded_audio = fix_length(audio, size=max_length)
 		X_train_spectrogram = convert_to_spectrogram(padded_audio)
 		X_train_mfcc = convert_to_mfcc(padded_audio)
 		X_train_zcr = zero_crossings_rates(padded_audio)

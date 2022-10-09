@@ -1,4 +1,5 @@
 ﻿pip==22.2.2
+libsndfile1-dev
 absl-py==1.0.0
 altair==4.2.0
 appdirs==1.4.4

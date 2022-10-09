@@ -23,7 +23,7 @@ import tensorflow_addons as tfa
 import subprocess
 if not os.path.isfile('model.h5'):
     subprocess.run(['curl --output model.h5 "https://media.githubusercontent.com/media/Khanamin-XOR/stream/main/final_model.h5"'], shell=True)
-model = load_model(model.h5)
+model = load_model('model.h5',compile=False)
 st.title("Emotion Classification with Image and Audio with Multimodal Approch")
 st.header("Example of emotion classification")
 st.text("Upload an  image and a Audio file for classification as Happy, Neural, Anger and Disgusted")
